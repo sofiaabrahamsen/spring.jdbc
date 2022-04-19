@@ -9,41 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class  DepartmentRepository implements CRUDInterface<Department>{
-    @Override
-    public boolean create(Department entity) {
-        return false;
-    }
-
-    @Override
-    public Department getSingleEntityById(int id) {
-        return null;
-    }
+public class DepartmentRepository implements IRepository<Department>{
 
     @Override
     public List<Department> getAllEntities() {
+        Connection conn = DatabaseConnectionManager.getConnection();
+        List<Department> allDepartments = new ArrayList<Department>();
         try {
-            Connection conn = DatabaseConnectionManager.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM departments");
-            ResultSet rs = stmt.executeQuery();
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM departments");
+            ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
-                //Indsætte i en liste
+                Department temp = new Department(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3)
+                );
+                allDepartments.add(temp);
             }
-        }
-        catch(SQLException e){
+
+        }catch(SQLException e){
+            System.out.println("Something wrong in statement");
             e.printStackTrace();
-            System.out.println("Something wrong with database");
         }
+        return allDepartments;
+    }
+
+    @Override
+    public Department getSingleById(int id) {
         return null;
     }
 
     @Override
-    public boolean update(Department entity) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteById(int id) {
+    public boolean create(Department entity) {
         return false;
     }
 }
