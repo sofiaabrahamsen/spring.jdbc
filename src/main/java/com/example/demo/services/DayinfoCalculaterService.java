@@ -8,10 +8,10 @@ public class DayinfoCalculaterService {
             return "afternoon";
         } else if (time > 15 && time <= 21) {
             return "evening";
-        } else if (time > 21 && time <= 4 ) {
+        } else if (time > 21 || time >=1 && time <=4 ) {
             return "night";
         } else{
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("fejl");
         }
     }
 }

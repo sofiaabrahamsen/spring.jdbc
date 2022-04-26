@@ -20,20 +20,27 @@ class DayinfoCalculaterServiceTest {
         //evening test
         int dayEqualsEveningTestData = 16;
         String dayEqualsEveningExpectedResult = "evening";
-        //night test
-        //int dayEqualsNightTestData = 22;
-        //String dayEqualsNightExpectedResult = "night";
+
 
         //Act
         String dayEqualsMorningResult = service.getDayinfoByTime(dayEqualsMorningTestData);
         String dayEqualsAfternoonResult = service.getDayinfoByTime(dayEqualsAfternoonTestData);
         String dayEqualsEveningResults = service.getDayinfoByTime(dayEqualsEveningTestData);
-        //String dayEqualsNightResult = service.getDayinfoByTime(dayEqualsNightTestData);
 
         //Assert
         assertEquals(dayEqualsMorningExpectedResult, dayEqualsMorningResult);
         assertEquals(dayEqualsAfternoonExpectedResult,dayEqualsAfternoonResult);
         assertEquals(dayEqualsEveningExpectedResult, dayEqualsEveningResults);
-        //assertEquals(dayEqualsNightExpectedResult, dayEqualsNightResult);
+    }
+
+    @Test
+    void getDayInfoByTimeNight(){
+        DayinfoCalculaterService service = new DayinfoCalculaterService();
+        int dayEqualsNightTestData = 2;
+        String dayEqualsNightExpectedResult = "night";
+
+        String dayEqualsNightResult = service.getDayinfoByTime(dayEqualsNightTestData);
+
+        assertEquals(dayEqualsNightExpectedResult, dayEqualsNightResult);
     }
 }
